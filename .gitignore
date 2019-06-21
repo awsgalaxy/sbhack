@@ -1,4 +1,6 @@
-**/.vs
-**/bin
-**/obj
-**/*.csproj.user
+bin
+obj
+/packages
+.vs/
+*.user
+build

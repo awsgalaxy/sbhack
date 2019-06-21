@@ -3,13 +3,13 @@ phases:
   pre_build:
     commands:
       - pip install --upgrade awscli
-      - dotnet restore AspNetCoreWebApplication/AspNetCoreWebApplication.csproj
-      - dotnet restore AspNetCoreWebApplicationTest/AspNetCoreWebApplicationTest.csproj
+      - dotnet restore BlockChainProject/BlockChainProject.csproj
+      - dotnet restore BlockChainProjectTest/BlockChainProjectTest.csproj
   build:
     commands:
-      - dotnet publish -c release -o ./build_output AspNetCoreWebApplication/AspNetCoreWebApplication.csproj
-      - dotnet publish -c release -o ./test_output AspNetCoreWebApplicationTest/AspNetCoreWebApplicationTest.csproj
-      - dotnet vstest AspNetCoreWebApplicationTest/test_output/AspNetCoreWebApplicationTest.dll
+      - dotnet publish -c release -o ./build_output BlockChainProject/BlockChainProject.csproj
+      - dotnet publish -c release -o ./test_output BlockChainProjectTest/BlockChainProjectTest.csproj
+      - dotnet vstest BlockChainProjectTest/test_output/BlockChainProjectTest.dll
   post_build:
     commands:
 
@@ -19,7 +19,7 @@ phases:
 artifacts:
   files:
     - template.yml
-    - AspNetCoreWebApplication/build_output/**/*
+    - BlockChainProject/build_output/**/*
     - scripts/**/*
     - appspec.yml
     - template-configuration.json
