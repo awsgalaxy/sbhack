@@ -23,3 +23,7 @@ artifacts:
     - scripts/**/*
     - appspec.yml
     - template-configuration.json
+    - BlockChainProject/vendors/**/*
+    - BlockChainProject/Content/**/*
+    - BlockChainProject/js/**/*
+    
