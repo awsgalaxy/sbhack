@@ -4,12 +4,12 @@ phases:
     commands:
       - pip install --upgrade awscli
       - dotnet restore BlockChainProject/BlockChainProject.csproj
-      - dotnet restore BlockChainProjectTest/BlockChainProjectTest.csproj
+      - dotnet restore AspNetCoreWebApplicationTest/AspNetCoreWebApplicationTest.csproj
   build:
     commands:
       - dotnet publish -c release -o ./build_output BlockChainProject/BlockChainProject.csproj
-      - dotnet publish -c release -o ./test_output BlockChainProjectTest/BlockChainProjectTest.csproj
-      - dotnet vstest BlockChainProjectTest/test_output/BlockChainProjectTest.dll
+      - dotnet publish -c release -o ./test_output AspNetCoreWebApplicationTest/AspNetCoreWebApplicationTest.csproj
+      - dotnet vstest AspNetCoreWebApplicationTest/test_output/AspNetCoreWebApplicationTest.dll
   post_build:
     commands:
 
