@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -23,4 +23,10 @@
     <ProjectReference Include="..\MongoDBAccess\MongoDBAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Content\**" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="vendors\**" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="js\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  
 </Project>
