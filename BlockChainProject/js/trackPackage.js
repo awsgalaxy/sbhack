@@ -48,10 +48,7 @@ function getPackageInfo(packageNumber) {
     $.get("/Package/GetPackageInfoByTrackNumber?trackNumber=" + packageNumber, function (data) {
         hideSpinner();
         fillPackageInfo(data);
-        if ((Math.floor((Math.random() * 10) + 1) % 5) == 0)
-            $(".verification.alert-danger").css("display", "block");            
-        else
-            $(".verification.alert-success").css("display", "block");
+      
     });
 }
 
@@ -102,6 +99,10 @@ function fillPackageInfo(packageInfo) {
         $(".search-empty-result-container").show();
         return;
     }
+    if ((Math.floor((Math.random() * 10) + 1) % 5) == 0)
+        $(".verification.alert-danger").css("display", "block");
+    else
+        $(".verification.alert-success").css("display", "block");
 
     $(".search-empty-result-container").hide();
 
