@@ -13,6 +13,8 @@ contract DeliveryTracker {
     
     address public owner;
     address public deviceKey;
+    
+    address[] public parentDeliveries;
         
     uint256 public createdDate;
     uint256 public startedDate;
@@ -23,9 +25,12 @@ contract DeliveryTracker {
     event DeliveryCompleted(address deviceKey, address operator);
     event ReceivedSensorData(address deviceKey, string hashedSensorData, address operator);
     
-    constructor(string memory _hashedAssetInfo, address _deviceKey) public {
+    constructor(string memory _hashedAssetInfo, address _deviceKey, address[] memory _parentDeliveries) public {
         hashedAssetInfo = _hashedAssetInfo;
         deviceKey = _deviceKey;
+        for (uint i = 0; i < _parentDeliveries.length; i++) {
+            parentDeliveries.push(_parentDeliveries[i]);
+        }
         owner = msg.sender;
         deliveryStatus = DeliveryStatus.CREATED;
         createdDate = now;
