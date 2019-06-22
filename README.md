@@ -22,9 +22,6 @@ How it works
 
 What's Here
 -----------
-
-This sample includes:
-
 * README.md
 * BlockChainProject - source code of the web application itself
 * SmartContracts - Ethereum smart contracts
