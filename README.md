@@ -15,7 +15,7 @@ How it works
 * All interactions between farmers, food factories and shops are being verified with a smart contract (letter of credit)
 * When buyer comes to a supermarket, he is able to pick up any item on the shelf to scan a QR code that instantly redirects to an Web Page with a candy looking infographic data showing end to end history from farmers to a shop.
 * All relevant documentation designed to be saved to IPFS.
-* Sensors data is saved to a relational DB and its hashed data is saved on the blockchain to proved its genuine.
+* Sensors data is saved to a relational DB and its hashed data is saved on the blockchain to prove its genuine.
 
 ![sequince diagram](https://www.plantuml.com/plantuml/img/VLB9QiCm4BthAnw--P13rqCf9MG3Gw6fdHzGfAajeaX6aWF--qxYXVJIcqRpjXbf6PCCgJjR8P99bf0LhWwa3RaK8Pr66xpk51SfI7KohiRdzd3OblZQOLrkDyK1qTik6Uzmb94qkXPyJWrXPRqwgKOQbmaXLVBXhtxLjQqr53B8YA8IV6bIZsn3rbmezAWeN8oYeR-P-hkRLFy_V3_3AxAMmkY_zYvsPov5KM7nmQfu0nvoZ28HvYvWyf3uaSTWb60auqTl9Ztck9z53toUVoGD6ISyK_TNgwSS9KdTJtk5YJZITQspWDZVd8ROJ7cUmqtYiV6j6FllYtacnhxag9HqyRR-xnBAQvgGh7c7VCsnwlhXZMjF4Oq_an1BSfg_moy0)
 
