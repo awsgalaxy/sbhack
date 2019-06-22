@@ -43,9 +43,12 @@ function SearchForPackage(trackNumber) {
 
 function getPackageInfo(packageNumber) {
     showSpinner();
+    $(".verification.alert-success").css("display", "none");
+    $(".verification.alert-danger").css("display", "none");
     $.get("/Package/GetPackageInfoByTrackNumber?trackNumber=" + packageNumber, function (data) {
         hideSpinner();
         fillPackageInfo(data);
+      
     });
 }
 
@@ -96,6 +99,10 @@ function fillPackageInfo(packageInfo) {
         $(".search-empty-result-container").show();
         return;
     }
+    //if ((Math.floor((Math.random() * 10) + 1) % 5) == 0)
+    //    $(".verification.alert-danger").css("display", "block");
+    //else
+        $(".verification.alert-success").css("display", "block");
 
     $(".search-empty-result-container").hide();
 
@@ -205,7 +212,7 @@ function initMap() {
 }
 
 let colors = ["#173f5f",
-   // "#20639b",
+    // "#20639b",
     "#3caea3",
     //"#f6d55c",
     "#ed553b",
