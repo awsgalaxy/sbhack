@@ -1,0 +1,193 @@
+﻿
+@{
+    ViewData["Title"] = "Track Package";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<script src="../js/trackPackage.js"></script>
+<script src="../vendors/Chart.js/dist/Chart.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvbFA1gMlQmNmvYxmjqTx1-_wYfvHgWDQ&callback=initMap" async defer></script>
+
+<div class="">
+
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Track Your Package</h3>
+        </div>
+
+        <div class="title_right">
+            <div class="col-md-8 col-sm-7 col-xs-12 form-group pull-right top_search">
+                <div class="input-group">
+                    <input type="text" id="packageNumber" class="form-control" placeholder="Package #">
+                    <span class="input-group-btn">
+                        <button id="trackPackage" class="btn btn-default" type="button">Go!</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="title_center search-empty-result-container">
+
+        <h4>The package cannot be found</h4>
+
+    </div>
+
+    <div class="row package-Info">
+        <div class="col-md-6 col-sm-6 col-xs-12 package-info">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Package Info </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Title
+                            </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <label class="control-label info-label" id="packageTitle"> </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Track #
+                            </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <label class="control-label info-label" id="trackNumber"> </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Description
+                            </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <label class="control-label info-label" id="packageDescription"> </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Weight
+                            </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <label class="control-label info-label" id="packageWeight"> </label>
+                                <label class="control-label info-label"> kg </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Height
+                            </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <label class="control-label info-label" id="packageHeight"></label>
+                                <label class="control-label info-label"> cm </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Width
+                            </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <label class="control-label info-label" id="packageWidth"></label>
+                                <label class="control-label info-label"> cm </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Lenght
+                            </label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <label class="control-label info-label" id="packageLenght"></label>
+                                <label class="control-label info-label"> cm </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 package-info">
+            <div class="x_panel">
+                <div class="x_title">
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        <select id="sensors-drop-down" class="form-control"></select>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <canvas id="pointsChart"></canvas>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row package-Info">
+        <div class="col-md-12 col-sm-12 col-xs-12 package-info">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Package History </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="table-responsive">
+                        <table class="table table-striped jambo_table " id="packageHistory">
+                            <thead>
+
+                            </thead>
+
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row package-Info">
+        <div class="col-md-12 col-sm-12 col-xs-12 package-info">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Map</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div id="map"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
