@@ -35,7 +35,7 @@ function SearchForPackage(trackNumber) {
         if (!trackNumber || trackNumber.lenght == 0)
             return;
     }
-   
+
     getPackageInfo(trackNumber);
     getPackageHistory(trackNumber);
 
@@ -56,7 +56,7 @@ function getPackageHistory(packageNumber) {
         fillPackageHistory(data);
         showMap(data);
         initChart(data);
-       
+
     });
 }
 
@@ -68,9 +68,16 @@ var accelerationKey = "acceleration";
 
 function initChart(data) {
     var optionsHtml = "";
-    var sensorNames = data[0].sensors.map(function (e) { return e.name; });
+    var sensorNames = data.map(function (value) { return value.sensors })
+        .reduce(function (a, b) { return a.concat(b.map(function (e) { return e.name })); }, [])
+        .filter(function (value, index, self) {
+            return self.indexOf(value) === index;
+        })
+
+    console.info(sensorNames);
+
     $.each(sensorNames, function (index, value) {
-        optionsHtml += "<option value='" + value + "'>" + value.charAt(0).toUpperCase() + value.slice(1)+"</option>"
+        optionsHtml += "<option value='" + value + "'>" + value.charAt(0).toUpperCase() + value.slice(1) + "</option>"
     });
 
     $("#sensors-drop-down").on("change", function (e, r, t, y) {
@@ -109,7 +116,13 @@ function fillPackageHistory(data) {
     }
     packageHistory = data;
 
-    var tableHeading = getTableHeadingHtml(packageHistory[0].sensors);
+    var sensorNames = packageHistory.map(function (value) { return value.sensors })
+        .reduce(function (a, b) { return a.concat(b.map(function (e) { return e })); }, [])
+        .filter(function (value, index, self) {
+            return self.findIndex(function (v) { return v.name === value.name }) === index;
+        });
+
+    var tableHeading = getTableHeadingHtml(sensorNames);
     $("#packageHistory thead").empty();
     $(tableHeading).appendTo($("#packageHistory thead"));
 
@@ -181,21 +194,24 @@ function getSensorInfo(deviceInfo, sensorName) {
 
 let map;
 var infoWindows = [];
+let bounds;
 
 function initMap() {
     const mapDiv = $('#map')[0];
-    map = new google.maps.Map(mapDiv, {
-        center: { lat: -34.397, lng: 150.644 },
-        zoom: 8
-    });
-
+    map = new google.maps.Map(mapDiv);
+    bounds = new google.maps.LatLngBounds();
 }
 
-let colors = [
-    "#FF0000",
-    "#00FF00",
-    "#0000FF"
-]
+let colors = ["#173f5f",
+   // "#20639b",
+    "#3caea3",
+    //"#f6d55c",
+    "#ed553b",
+    "#ad4d46",
+    "#b3833e",
+    "#c1ac58",
+    "#78934e",
+    "#92cb81"];
 
 function showMap(data) {
     var markerArray = {};
@@ -220,9 +236,11 @@ function showMap(data) {
             strokeOpacity: 1.0,
             strokeWeight: 2
         });
-        console.info(arrayKeys.indexOf(index))
         flightPath.setMap(map);
     });
+
+    map.fitBounds(bounds);
+    map.panToBounds(bounds);
 }
 
 function addMarkerToMap(deviceInfo) {
@@ -235,7 +253,7 @@ function addMarkerToMap(deviceInfo) {
     });
 
     attachMarkerDescription(marker, getDeviceDescription(deviceInfo))
-    map.setCenter(new google.maps.LatLng(deviceInfo.lat, deviceInfo.lng));
+    bounds.extend(latlong);
     return latlong;
 }
 
@@ -282,7 +300,12 @@ function attachMarkerDescription(marker, text) {
 }
 
 function drawChart(data, key) {
-    var res = data.map(function (e) { return { date: e.date, value: $.grep(e.sensors, function (s) { return s.name == key; })[0].data } });
+    var res = data.map(function (e) {
+        var sensor = e.sensors.find(function (s) { return s.name == key; });
+        return {
+            date: e.date, value: sensor ? sensor.data : 0
+        }
+    });
 
     var labels = res.map(function (e) { return moment(e.date).format('l'); });
     var values = res.map(function (e) { return e.value; });
@@ -308,7 +331,7 @@ function drawChart(data, key) {
 
 }
 
- function getUrlParameter(sParam) {
+function getUrlParameter(sParam) {
     var sPageURL = window.location.search.substring(1),
         sURLVariables = sPageURL.split('&'),
         sParameterName,

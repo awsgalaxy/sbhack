@@ -1,4 +1,32 @@
 
+#modal-window {
+    display: none;
+}
+
+.modal a.close-modal {
+    top: 0.5px !important;
+    right: 2.5px !important;
+    width: 25px !important;
+    height: 25px !important;
+}
+
+.modal .modal-text.error {
+    color: #ff0000b5;
+}
+
+.modal .close-modal-hidden {
+    display: none;
+}
+
+.modal .ok-btn {
+    text-align: center;
+    display: none;
+}
+
+    .modal .ok-btn .btn {
+        min-width: 100px;
+    }
+
 html, body {
     height: 100%;
 }
@@ -6,28 +34,34 @@ html, body {
 #map {
     height: 500px;
 }
-.search-empty-result-container{
-    display:none;
+
+.search-empty-result-container {
+    display: none;
 }
-.search-empty-result-container h4{
-    margin: 0;
-}
+
+    .search-empty-result-container h4 {
+        margin: 0;
+    }
+
 .package-Info {
     display: none;
 }
+
 .info-label {
     font-weight: 400;
 }
+
 td.not-acceptable {
     background: #ff00008a;
     color: white;
 }
+
 .full-width {
     width: 100%;
 }
 
-.title_center{
-    text-align:center;
+.title_center {
+    text-align: center;
 }
 
 .package-info .panel_toolbox > li {
@@ -5111,7 +5145,7 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 /** /bootstrap-datetimepicker **/
 
 .spinner {
-    display:none;
+    display: none;
     position: absolute;
     z-index: 999;
     text-align: center;
