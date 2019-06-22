@@ -16,7 +16,6 @@
 <link href="../vendors/switchery/dist/switchery.min.css" rel="stylesheet">
 
 
-
 <div class="col-md-12 col-xs-12 col-md-offset-0">
 	<div class="x_panel">
 		<div class="x_title">
@@ -24,135 +23,136 @@
 			<div class="clearfix"></div>
 		</div>
 		<div class="x_content">
-			<form data-parsley-validate class="form-horizontal form-label-left">
+            <form data-parsley-validate class="form-horizontal form-label-left">
 
-				<div class="form-group">
-					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
-						Shipment Id <span class="required">*</span>
-					</label>
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						<input type="text" id="shipmentId" name="shipmentId" required="required" class="form-control col-md-7 col-xs-12">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-						Title <span class="required">*</span>
-					</label>
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						<input type="text" name="title" required="required" class="form-control col-md-7 col-xs-12">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-						Description <span class="required">*</span>
-					</label>
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						<input type="text" name="description" required="required" class="form-control col-md-7 col-xs-12">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-						Weight <span class="required">*</span>
-					</label>
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						<input type="number" step="0.1" name="weight" required="required" class="form-control col-md-7 col-xs-12">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-						Height <span class="required">*</span>
-					</label>
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						<input type="number" step="0.1" name="height" required="required" class="form-control col-md-7 col-xs-12">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-						Width <span class="required">*</span>
-					</label>
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						<input type="number" step="0.1" name="width" required="required" class="form-control col-md-7 col-xs-12">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-						Length <span class="required">*</span>
-					</label>
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						<input type="number" step="0.1" name="lenght" required="required" class="form-control col-md-7 col-xs-12">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-						Emails for notification
-					</label>
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						<input id="emails" type="text" class="tags form-control" />
-						<div id="suggestions-container" style="position: relative; float: left; width: 250px; margin: 10px;"></div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-						Device <span class="required">*</span>
-					</label>
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						<select class="form-control" name="device">
-							@foreach (var item in Model.Devices)
-							{
-								<option value="@item.Id" data-key="@item.DeviceKey"> @item.Name</option>
-							}
-						</select>
-					</div>
-				</div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                        Shipment Id <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="shipmentId" name="shipmentId" required="required" class="form-control col-md-7 col-xs-12">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                        Title <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" name="title" required="required" class="form-control col-md-7 col-xs-12">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                        Description <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" name="description" required="required" class="form-control col-md-7 col-xs-12">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                        Weight <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="number" step="0.1" name="weight" required="required" class="form-control col-md-7 col-xs-12">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                        Height <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="number" step="0.1" name="height" required="required" class="form-control col-md-7 col-xs-12">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                        Width <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="number" step="0.1" name="width" required="required" class="form-control col-md-7 col-xs-12">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                        Length <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="number" step="0.1" name="lenght" required="required" class="form-control col-md-7 col-xs-12">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                        Related Shipments #
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="relatedShipments" type="text" class="tags form-control" />
+                        <div id="shipment-numbers-container" style="position: relative; float: left; width: 250px; margin: 10px;"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                        Device <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select class="form-control" name="device">
+                            @foreach (var item in Model.Devices)
+                            {
+                                <option value="@item.Id" data-key="@item.DeviceKey"> @item.Name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
 
-				<div class="form-group">
-					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">
-						Sensors <span class="required">:</span>
-					</label>
-					<div class="col-md-8 col-sm-8 col-xs-12">
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">
+                        Sensors <span class="required">:</span>
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
 
-						@foreach (var item in Model.Sensors.Where(e => e.Name != "gps"))
-						{
-							<div class="form-group">
-								<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">
-									@(item.Name.First().ToString().ToUpper() + item.Name.Substring(1))
-								</label>
-								<div class="col-md-9 col-sm-9 col-xs-12">
-									<div class="form-group">
-										<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">
-											Min:
-										</label>
-										<div class="col-md-3 col-sm-3 col-xs-12">
-											<input type="number" step="0.1" required="required" name="@(item.Id)-minValue" class="sensor-max form-control col-md-7 col-xs-12">
-										</div>
-										<label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">
-											Max:
-										</label>
-										<div class="col-md-3 col-sm-3 col-xs-12">
-											<input type="number" step="0.1" required="required" name="@(item.Id)-maxValue" class="sensor-max form-control col-md-7 col-xs-12">
-										</div>
-										<div class="col-md-2 col-sm-2 col-xs-12">
-											<input type="checkbox" value="@item.Id" class="js-switch sensor-checkbox" checked />
-										</div>
-									</div>
-								</div>
-							</div>
+                        @foreach (var item in Model.Sensors.Where(e => e.Name != "gps"))
+                        {
+                            <div class="form-group">
+                                <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">
+                                    @(item.Name.First().ToString().ToUpper() + item.Name.Substring(1))
+                                </label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">
+                                            Min:
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input type="number" step="0.1" name="@(item.Id)-minValue" class="sensor-max form-control col-md-7 col-xs-12">
+                                        </div>
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">
+                                            Max:
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input type="number" step="0.1" name="@(item.Id)-maxValue" class="sensor-max form-control col-md-7 col-xs-12">
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input type="checkbox" value="@item.Id" class="js-switch sensor-checkbox" checked />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
 
-						}
-					</div>
-				</div>
+                        }
+                    </div>
+                </div>
 
-				<div class="form-group">
-					<div class="col-md-4 col-md-offset-2">
-						<input id="files" type="file" multiple="multiple" />
-						<output id="result" />
-					</div>
-				</div>
+                <div class="form-group">
+                    <div class="col-md-4 col-md-offset-2">
+                        <input id="files" type="file" multiple="multiple" />
+                        <output id="result" />
+                    </div>
+                </div>
 
-				<button type="submit" class="btn btn-success">Submit</button>
+                <button type="submit" class="btn btn-success">Submit</button>
 
-			</form>
+            </form>
 
 			@*
 

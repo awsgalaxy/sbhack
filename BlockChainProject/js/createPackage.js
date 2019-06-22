@@ -4,9 +4,9 @@ var fileList = [];
 $(document).ready(function () {
 	SetMenuItemAsActive();
 
-	$('#emails').tagsInput({
+	$('#relatedShipments').tagsInput({
 		width: 'auto',
-		defaultText: "type email"
+		defaultText: "type #"
 	});
 
 	$(".sensor-checkbox").change(function (e) {
@@ -32,7 +32,11 @@ $(document).ready(function () {
 		data["sensorsInfo"] = sensorData;
 
 		var deviceKey = $("select[name=device] option:selected").attr("data-key");
-		data['deviceKey'] = deviceKey;
+        data['deviceKey'] = deviceKey;
+        var relatedShipmentNumbers = $("#relatedShipments").val();
+
+        data['parentPackages'] = relatedShipmentNumbers.split(",");
+
 		console.log(data);
 		var info = md5(JSON.stringify(data));
 
