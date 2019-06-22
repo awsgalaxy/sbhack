@@ -43,7 +43,7 @@ namespace Models.Services
             {
                 var allTrackNumbers = GetParentTrackNumbers(trackingNumber);
 
-                var sensorsData = _sensorBatchDataStore.GetObjectsProperties(s => allTrackNumbers.Contains(s.TrackNumber), s => s);
+                var sensorsData = _sensorBatchDataStore.GetObjectsProperties(s => allTrackNumbers.Contains(s.TrackNumber), s => s).OrderBy(p=>p.TrackNumber).ThenBy(p=>p.Date);
                 var sensors = _sensorStore.GetObjectsProperties(s => true, s => s);
                 var gpsSensorId = sensors.FirstOrDefault(s => s.Name == "gps")?.Id;
                 var packagesData = _packageStore.GetObjectsProperties(p => allTrackNumbers.Contains(p.TrackNumber), p => p);
