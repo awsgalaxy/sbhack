@@ -25,32 +25,49 @@ namespace Models.Services
             _sensorStore = sensorStore;
         }
 
+        private IEnumerable<string> GetParentTrackNumbers(string trackNumber)
+        {
+            var numbers = _packageStore.GetObjectsProperties(p => p.TrackNumber == trackNumber, p => p.ParentPackages).Where(p => p != null).SelectMany(p => p).ToList();
+            var result = new List<string>();
+            foreach (var number in numbers)
+            {
+                result.AddRange(GetParentTrackNumbers(number));
+            }
+            result.Add(trackNumber);
+            return result;
+        }
+
         public Task<IEnumerable<PackageState>> GetSensosrsDataByTrackNumber(string trackingNumber)
         {
             return Task.Run(() =>
             {
-                var sensorsData = _sensorBatchDataStore.GetObjectsProperties(s => s.TrackNumber == trackingNumber, s => s);
+                var allTrackNumbers = GetParentTrackNumbers(trackingNumber);
+
+                var sensorsData = _sensorBatchDataStore.GetObjectsProperties(s => allTrackNumbers.Contains(s.TrackNumber), s => s);
                 var sensors = _sensorStore.GetObjectsProperties(s => true, s => s);
                 var gpsSensorId = sensors.FirstOrDefault(s => s.Name == "gps")?.Id;
-                var packageData = _packageStore.GetObjectsProperties(p => p.TrackNumber == trackingNumber, p => p).FirstOrDefault();
+                var packagesData = _packageStore.GetObjectsProperties(p => allTrackNumbers.Contains(p.TrackNumber), p => p);
 
-                return sensorsData.Select(c => {
+                return sensorsData.Select(c =>
+                {
                     var gpsSensor = c.Info.FirstOrDefault(s => s.SensorId == gpsSensorId);
                     double lat = 0, longitude = 0;
 
                     var gpsSensorData = gpsSensor?.Data?.ToString().Split(':');
-                    if(gpsSensorData.Length == 2)
+                    if (gpsSensorData.Length == 2)
                     {
                         Double.TryParse(gpsSensorData[0], out lat);
                         Double.TryParse(gpsSensorData[1], out longitude);
                     }
 
+                    var packageData = packagesData.FirstOrDefault(p => p.TrackNumber == c.TrackNumber);
 
                     return new PackageState()
                     {
                         Lat = lat,
                         Lng = longitude,
                         Date = c.Date,
+                        PackageId = packageData.Id,
                         Sensors = c.Info.Where(s => s.SensorId != gpsSensorId).Select(s => new SensorState()
                         {
                             Data = s.Data.ToString(),
@@ -69,9 +86,10 @@ namespace Models.Services
                 var sensorsData = _sensorBatchDataStore.GetObjectsProperties(s => true, s => s);
                 var sensors = _sensorStore.GetObjectsProperties(s => true, s => s);
                 var gpsSensorId = sensors.FirstOrDefault(s => s.Name == "gps")?.Id;
-                var packages = _packageStore.GetObjectsProperties(p => true, p=>p);
+                var packages = _packageStore.GetObjectsProperties(p => true, p => p);
 
-                return sensorsData.SelectMany(c => {
+                return sensorsData.SelectMany(c =>
+                {
                     var gpsSensor = c.Info.FirstOrDefault(s => s.SensorId == gpsSensorId);
                     double lat = 0, longitude = 0;
 
