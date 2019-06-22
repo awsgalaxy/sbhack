@@ -1,8 +1,8 @@
 ﻿@model BlockChainProject.Models.CreateTaskViewModel
 
 @{
-	ViewData["Title"] = "Create Package";
-	Layout = "~/Views/_Layout.cshtml";
+    ViewData["Title"] = "Create Package";
+    Layout = "~/Views/_Layout.cshtml";
 }
 <!-- jQuery Tags Input -->
 <script src="../vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
@@ -17,12 +17,12 @@
 
 
 <div class="col-md-12 col-xs-12 col-md-offset-0">
-	<div class="x_panel">
-		<div class="x_title">
-			<h2>Create Package</h2>
-			<div class="clearfix"></div>
-		</div>
-		<div class="x_content">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Create Package</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
             <form data-parsley-validate class="form-horizontal form-label-left">
 
                 <div class="form-group">
@@ -33,7 +33,7 @@
                         <input type="text" id="shipmentId" name="shipmentId" required="required" class="form-control col-md-7 col-xs-12">
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
                         Title <span class="required">*</span>
@@ -52,36 +52,29 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-                        Weight <span class="required">*</span>
+                        Producer <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" step="0.1" name="weight" required="required" class="form-control col-md-7 col-xs-12">
+                        <input type="text" name="producer" required="required" class="form-control col-md-7 col-xs-12">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-                        Height <span class="required">*</span>
+                        Date of Production <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" step="0.1" name="height" required="required" class="form-control col-md-7 col-xs-12">
+                        <input type="text" name="productionDate" required="required" class="form-control col-md-7 col-xs-12">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-                        Width <span class="required">*</span>
+                        Expiration date <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" step="0.1" name="width" required="required" class="form-control col-md-7 col-xs-12">
+                        <input type="text" name="expirationDate" required="required" class="form-control col-md-7 col-xs-12">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-                        Length <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" step="0.1" name="lenght" required="required" class="form-control col-md-7 col-xs-12">
-                    </div>
-                </div>
+
                 <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
                         Related Shipments #
@@ -154,35 +147,35 @@
 
             </form>
 
-			@*
+            @*
 
 
 
 
-					<div class="row">
-						<label class="control-label col-xs-12" for="wheight">
-							Sensors <span class="required">*</span>
-						</label>
-					</div>
+                    <div class="row">
+                        <label class="control-label col-xs-12" for="wheight">
+                            Sensors <span class="required">*</span>
+                        </label>
+                    </div>
 
-					@foreach (var item in Model.Sensors)
-					{
-						<div class="row">
-							<label class="control-label col-xs-12" for="wheight">
-								@item.Name
-							</label>
+                    @foreach (var item in Model.Sensors)
+                    {
+                        <div class="row">
+                            <label class="control-label col-xs-12" for="wheight">
+                                @item.Name
+                            </label>
 
-							<span class="col-xs-2">Min Value:</span><span class="col-xs-3"><input type="number" step="0.1" class="sensor-min" name="@(item.Id)-minValue" required="required" class="form-control"></span>
-							<span class="col-xs-2">Max Value:</span><span class="col-xs-3"><input type="number" step="0.1" class="sensor-max" name="@(item.Id)-maxValue" required="required" class="form-control"></span>
+                            <span class="col-xs-2">Min Value:</span><span class="col-xs-3"><input type="number" step="0.1" class="sensor-min" name="@(item.Id)-minValue" required="required" class="form-control"></span>
+                            <span class="col-xs-2">Max Value:</span><span class="col-xs-3"><input type="number" step="0.1" class="sensor-max" name="@(item.Id)-maxValue" required="required" class="form-control"></span>
 
-							<label class="col-xs-2">
-								<input type="checkbox" value="@item.Id" class="js-switch sensor-checkbox" checked /> Checked
-							</label>
-						</div>
-					}
+                            <label class="col-xs-2">
+                                <input type="checkbox" value="@item.Id" class="js-switch sensor-checkbox" checked /> Checked
+                            </label>
+                        </div>
+                    }
 
-					<button type="submit" class="btn btn-success">Submit</button>
-				</form>*@
-		</div>
-	</div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </form>*@
+        </div>
+    </div>
 </div>
