@@ -65,5 +65,11 @@ namespace BlockChainProject.Controllers
         {          
             return await _packageService.GetSensosrsDataByTrackNumber(trackNumber);      
         }
+
+        [HttpPost]
+        public async Task<IEnumerable<string>> GetSmartContractAdressesByTrackingNumbers(List<string> trackingNumbers)
+        {
+           return await _packageService.GetSmartContractAdressesByTrackingNumbers(trackingNumbers);
+        }
     }
 }

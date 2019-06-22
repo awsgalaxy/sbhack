@@ -12,5 +12,6 @@ namespace Models.Services
         Task<PackageInfo> GetPackageByDeviceKey(string deviceId);
         Task<PackageInfo> GetPackageInfoByTrackNumber(string trackNumber);
         Task<IEnumerable<SensorRawData>> GetAllSensorsData();
+        Task<List<string>> GetSmartContractAdressesByTrackingNumbers(IEnumerable<string> trackingNumbers);
     }
 }

@@ -137,5 +137,13 @@ namespace Models.Services
                 return _packageStore.GetObjectsProperties(p => p.TrackNumber == trackNumber, p => p).FirstOrDefault();
             });
         }
+
+        public Task<List<string>> GetSmartContractAdressesByTrackingNumbers(IEnumerable<string> trackingNumbers)
+        {
+            return Task.Run(() =>
+            {
+                return _packageStore.GetObjectsProperties(p => trackingNumbers.Contains(p.TrackNumber), p => p.SmartContractAdress);
+            });
+        }
     }
 }
