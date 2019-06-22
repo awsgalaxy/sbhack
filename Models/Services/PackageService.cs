@@ -67,7 +67,7 @@ namespace Models.Services
                         Lat = lat,
                         Lng = longitude,
                         Date = c.Date,
-                        PackageId = packageData.Id,
+                        PackageId = packageData.Id, 
                         Sensors = c.Info.Where(s => s.SensorId != gpsSensorId).Select(s => new SensorState()
                         {
                             Data = s.Data.ToString(),
@@ -135,6 +135,14 @@ namespace Models.Services
             return Task.Run(() =>
             {
                 return _packageStore.GetObjectsProperties(p => p.TrackNumber == trackNumber, p => p).FirstOrDefault();
+            });
+        }
+
+        public Task<List<string>> GetSmartContractAdressesByTrackingNumbers(IEnumerable<string> trackingNumbers)
+        {
+            return Task.Run(() =>
+            {
+                return _packageStore.GetObjectsProperties(p => trackingNumbers.Contains(p.TrackNumber), p => p.SmartContractAdress);
             });
         }
     }
