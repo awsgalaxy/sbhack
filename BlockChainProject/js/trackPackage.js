@@ -48,10 +48,10 @@ function getPackageInfo(packageNumber) {
     $.get("/Package/GetPackageInfoByTrackNumber?trackNumber=" + packageNumber, function (data) {
         hideSpinner();
         fillPackageInfo(data);
-        if ((Math.floor((Math.random() * 10) + 1) % 2) == 0)
-            $(".verification.alert-success").css("display", "block");
+        if ((Math.floor((Math.random() * 10) + 1) % 5) == 0)
+            $(".verification.alert-danger").css("display", "block");            
         else
-            $(".verification.alert-danger").css("display", "block");
+            $(".verification.alert-success").css("display", "block");
     });
 }
 
