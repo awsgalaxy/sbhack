@@ -70,7 +70,7 @@ namespace BlockChainProject
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute("default", "{controller=Package}/{action=TrackPackage}/{id?}");
                 routes.MapRoute("notdefault", "/api/{controller}/{action}/{id?}");
             });
 

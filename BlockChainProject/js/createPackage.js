@@ -51,9 +51,10 @@ $(document).ready(function () {
 
 				ChangeMessageText("The package data is saving...", "");
 
-				$.post("/package/createpackage", data, function () {
+				$.post("/package/createpackage", data, function (resp) {
+					console.log(resp);
 					HideMessage();
-					setTimeout(() => ShowMessage("Your data has been successfully saved.", "", true), 200);
+					setTimeout(() => ShowMessage(`Your data has been successfully saved. Please track your delivery with this number: ${resp}`, "", true), 200);
 				});
 			});
 		}).catch(console.error);
