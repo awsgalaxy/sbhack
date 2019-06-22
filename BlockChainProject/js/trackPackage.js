@@ -43,9 +43,15 @@ function SearchForPackage(trackNumber) {
 
 function getPackageInfo(packageNumber) {
     showSpinner();
+    $(".verification.alert-success").css("display", "none");
+    $(".verification.alert-danger").css("display", "none");
     $.get("/Package/GetPackageInfoByTrackNumber?trackNumber=" + packageNumber, function (data) {
         hideSpinner();
         fillPackageInfo(data);
+        if ((Math.floor((Math.random() * 10) + 1) % 2) == 0)
+            $(".verification.alert-success").css("display", "block");
+        else
+            $(".verification.alert-danger").css("display", "block");
     });
 }
 
@@ -202,7 +208,7 @@ function initMap() {
 }
 
 let colors = ["#173f5f",
-   // "#20639b",
+    // "#20639b",
     "#3caea3",
     //"#f6d55c",
     "#ed553b",
