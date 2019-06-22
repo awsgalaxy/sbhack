@@ -221,11 +221,11 @@ function showMap(data) {
         return accumulator;
     }, {})
 
-    var arrayKeys = Object.keys(markerArray)
+    var arrayKeys = Object.keys(markerArray);
 
-    for (var i = 1; i < arrayKeys.length; i++) {
-        markerArray[arrayKeys[i - 1]].push(markerArray[arrayKeys[i]][0])
-    }
+    $.each(markerArray, function (index, value) {
+        markerArray[index] = value.sort(function (a, b) { return new Date(a) - new Date(b) });
+    });
 
     $.each(markerArray, function (index, value) {
         var flightPath = new google.maps.Polyline({
