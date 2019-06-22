@@ -25,5 +25,6 @@ namespace Models.Package
         public string OperatorId { get; set; }
         public string TrackNumber { get; set; }
         public string SmartContractAdress { get; set; }
+        public List<string> ParentPackages { get; set; }
     }
 }
