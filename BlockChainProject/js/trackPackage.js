@@ -35,7 +35,7 @@ function SearchForPackage(trackNumber) {
         if (!trackNumber || trackNumber.lenght == 0)
             return;
     }
-   
+
     getPackageInfo(trackNumber);
     getPackageHistory(trackNumber);
 
@@ -56,7 +56,7 @@ function getPackageHistory(packageNumber) {
         fillPackageHistory(data);
         showMap(data);
         initChart(data);
-       
+
     });
 }
 
@@ -77,7 +77,7 @@ function initChart(data) {
     console.info(sensorNames);
 
     $.each(sensorNames, function (index, value) {
-        optionsHtml += "<option value='" + value + "'>" + value.charAt(0).toUpperCase() + value.slice(1)+"</option>"
+        optionsHtml += "<option value='" + value + "'>" + value.charAt(0).toUpperCase() + value.slice(1) + "</option>"
     });
 
     $("#sensors-drop-down").on("change", function (e, r, t, y) {
@@ -194,21 +194,24 @@ function getSensorInfo(deviceInfo, sensorName) {
 
 let map;
 var infoWindows = [];
+let bounds;
 
 function initMap() {
     const mapDiv = $('#map')[0];
-    map = new google.maps.Map(mapDiv, {
-        center: { lat: -34.397, lng: 150.644 },
-        zoom: 8
-    });
-
+    map = new google.maps.Map(mapDiv);
+    bounds = new google.maps.LatLngBounds();
 }
 
-let colors = [
-    "#FF0000",
-    "#00FF00",
-    "#0000FF"
-]
+let colors = ["#173f5f",
+   // "#20639b",
+    "#3caea3",
+    //"#f6d55c",
+    "#ed553b",
+    "#ad4d46",
+    "#b3833e",
+    "#c1ac58",
+    "#78934e",
+    "#92cb81"];
 
 function showMap(data) {
     var markerArray = {};
@@ -235,6 +238,9 @@ function showMap(data) {
         });
         flightPath.setMap(map);
     });
+
+    map.fitBounds(bounds);
+    map.panToBounds(bounds);
 }
 
 function addMarkerToMap(deviceInfo) {
@@ -247,7 +253,7 @@ function addMarkerToMap(deviceInfo) {
     });
 
     attachMarkerDescription(marker, getDeviceDescription(deviceInfo))
-    map.setCenter(new google.maps.LatLng(deviceInfo.lat, deviceInfo.lng));
+    bounds.extend(latlong);
     return latlong;
 }
 
@@ -325,7 +331,7 @@ function drawChart(data, key) {
 
 }
 
- function getUrlParameter(sParam) {
+function getUrlParameter(sParam) {
     var sPageURL = window.location.search.substring(1),
         sURLVariables = sPageURL.split('&'),
         sParameterName,
