@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
+using Models.Services;
 using MongoDBAccess;
 using MongoDBAccess.MongoDB;
 using NLog;
@@ -37,6 +38,9 @@ namespace BlockChainProject
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddTransient<ISensorsService, SensorsService>();
+            services.AddTransient<IPackageService, PackageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
