@@ -16,10 +16,9 @@ namespace Models.Package
         public string ShipmentId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public double Weight { get; set; }
-        public double Height { get; set; }
-        public double Lenght { get; set; }
-        public double Width { get; set; }
+        public DateTime ProductionDate { get; set; }
+        public DateTime ExpirationDate { get; set; }
+        public string Producer { get; set; }
         public IEnumerable<SensorData> SensorsInfo { get; set; }
         public string DeviceKey { get; set; }
         public string OperatorId { get; set; }

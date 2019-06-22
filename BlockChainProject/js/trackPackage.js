@@ -102,10 +102,9 @@ function fillPackageInfo(packageInfo) {
     $("#packageTitle").text(packageInfo.title);
     $("#trackNumber").text(packageInfo.trackNumber);
     $("#packageDescription").text(packageInfo.description);
-    $("#packageWeight").text(packageInfo.weight);
-    $("#packageHeight").text(packageInfo.height);
-    $("#packageWidth").text(packageInfo.width);
-    $("#packageLenght").text(packageInfo.lenght);
+    $("#productionDate").text(packageInfo.productionDate);
+    $("#expirationDate").text(packageInfo.expirationDate);
+    $("#producer").text(packageInfo.producer);
 
     $(".package-Info").show();
 }
