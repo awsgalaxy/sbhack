@@ -131,37 +131,39 @@ function fillPackageHistory(data) {
     $("#packageHistory thead").empty();
     $(tableHeading).appendTo($("#packageHistory thead"));
 
-    var rowsHtml = getTableRowsHtml(packageHistory);
+    var rowsHtml = getTableRowsHtml(packageHistory, sensorNames);
     $("#packageHistory tbody").empty();
     $(rowsHtml).appendTo($("#packageHistory tbody"));
 
     $(".search-empty-result-container").hide();
     $(".package-Info").show();
 }
-function getTableRowsHtml(data) {
+function getTableRowsHtml(data, sensorNames) {
     var html = "";
     $.each(data, function (index, value) {
 
         html += "<tr class='" + (index % 2 == 0 ? "even" : "odd") + "'> ";
         html += "<td class='measuring-date'>" + moment(value.date).format('LLLL') + "</td>";
 
-        if (checkIfSensorExists(value.sensors, temperatureKey)) {
+        if (checkIfSensorExists(sensorNames, temperatureKey)) {
             var temperature = getSensorInfo(value, temperatureKey);
             html += "<td class='temperature " + (temperature.isAcceptableMeasure ? "" : "not-acceptable") + "'>" + temperature.data + " " + getMesurementUnit(temperatureKey) + " </td>";
         }
-        if (checkIfSensorExists(value.sensors, humidityKey)) {
+        if (checkIfSensorExists(sensorNames, humidityKey)) {
             var humidity = getSensorInfo(value, humidityKey);
             html += "<td class='humidity " + (humidity.isAcceptableMeasure ? "" : "not-acceptable") + "'>" + humidity.data + " " + getMesurementUnit(humidityKey) + " </td>";
         }
-        if (checkIfSensorExists(value.sensors, presureKey)) {
+        if (checkIfSensorExists(sensorNames, presureKey)) {
             var presure = getSensorInfo(value, presureKey);
+            console.info(value);
+            console.info(presure);
             html += "<td class='presure " + (presure.isAcceptableMeasure ? "" : "not-acceptable") + "'>" + presure.data + " " + getMesurementUnit(presureKey) + " </td>";
         }
-        if (checkIfSensorExists(value.sensors, lightKey)) {
+        if (checkIfSensorExists(sensorNames, lightKey)) {
             var light = getSensorInfo(value, lightKey);
             html += "<td class='light " + (light.isAcceptableMeasure ? "" : "not-acceptable") + "'>" + light.data + " " + getMesurementUnit(lightKey) + " </td>";
         }
-        if (checkIfSensorExists(value.sensors, accelerationKey)) {
+        if (checkIfSensorExists(sensorNames, accelerationKey)) {
             var acceleration = getSensorInfo(value, accelerationKey);
             html += "<td class='light " + (acceleration.isAcceptableMeasure ? "" : "not-acceptable") + "'>" + acceleration.data + " " + getMesurementUnit(accelerationKey) + " </td>";
         }
@@ -192,9 +194,10 @@ function checkIfSensorExists(array, name) {
 }
 function getSensorInfo(deviceInfo, sensorName) {
     var values = $.grep(deviceInfo.sensors, function (e) { return e.name == sensorName; });
-    if (values.lenght == 0)
-        return null;
-    return values[0];
+    return values[0] || {
+        isAcceptableMeasure: true,
+        data: "N/A"
+    };;
 }
 
 let map;
@@ -227,11 +230,11 @@ function showMap(data) {
         return accumulator;
     }, {})
 
-    var arrayKeys = Object.keys(markerArray)
+    var arrayKeys = Object.keys(markerArray);
 
-    for (var i = 1; i < arrayKeys.length; i++) {
-        markerArray[arrayKeys[i - 1]].push(markerArray[arrayKeys[i]][0])
-    }
+    //$.each(markerArray, function (index, value) {
+    //    markerArray[index] = value.sort(function (a, b) { return new Date(a) - new Date(b) });
+    //});
 
     $.each(markerArray, function (index, value) {
         var flightPath = new google.maps.Polyline({
