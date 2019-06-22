@@ -191,21 +191,38 @@ function initMap() {
 
 }
 
+let colors = [
+    "#FF0000",
+    "#00FF00",
+    "#0000FF"
+]
+
 function showMap(data) {
-    var markerArray = [];
-    $.each(data, function (index, value) {
-        markerArray.push(addMarkerToMap(value));
-    });
+    var markerArray = {};
+    markerArray = data.reduce(function (accumulator, value) {
+        var array = accumulator[value.packageId] || [];
+        array.push(addMarkerToMap(value))
+        accumulator[value.packageId] = array;
+        return accumulator;
+    }, {})
 
-    var flightPath = new google.maps.Polyline({
-        path: markerArray,
-        geodesic: true,
-        strokeColor: '#FF0000',
-        strokeOpacity: 1.0,
-        strokeWeight: 2
-    });
+    var arrayKeys = Object.keys(markerArray)
 
-    flightPath.setMap(map);
+    for (var i = 1; i < arrayKeys.length; i++) {
+        markerArray[arrayKeys[i - 1]].push(markerArray[arrayKeys[i]][0])
+    }
+
+    $.each(markerArray, function (index, value) {
+        var flightPath = new google.maps.Polyline({
+            path: value,
+            geodesic: true,
+            strokeColor: colors[arrayKeys.indexOf(index)],
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+        });
+        console.info(arrayKeys.indexOf(index))
+        flightPath.setMap(map);
+    });
 }
 
 function addMarkerToMap(deviceInfo) {

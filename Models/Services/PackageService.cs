@@ -67,7 +67,7 @@ namespace Models.Services
                         Lat = lat,
                         Lng = longitude,
                         Date = c.Date,
-                        PackageId = packageData.Id,
+                        PackageId = packageData.Id, 
                         Sensors = c.Info.Where(s => s.SensorId != gpsSensorId).Select(s => new SensorState()
                         {
                             Data = s.Data.ToString(),
