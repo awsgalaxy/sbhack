@@ -18,6 +18,7 @@ namespace Models.Package
         public string Description { get; set; }
         public DateTime ProductionDate { get; set; }
         public DateTime ExpirationDate { get; set; }
+        public string Producer { get; set; }
         public IEnumerable<SensorData> SensorsInfo { get; set; }
         public string DeviceKey { get; set; }
         public string OperatorId { get; set; }
