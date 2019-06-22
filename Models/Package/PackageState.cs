@@ -7,6 +7,7 @@ namespace Models.Package
 {
     public class PackageState
     {
+        public string PackageId { get; set; }
         public IEnumerable<SensorState> Sensors { get; set; }
         public double Lng { get; set; }
         public double Lat { get; set; }
