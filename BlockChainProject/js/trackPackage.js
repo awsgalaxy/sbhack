@@ -68,7 +68,14 @@ var accelerationKey = "acceleration";
 
 function initChart(data) {
     var optionsHtml = "";
-    var sensorNames = data[0].sensors.map(function (e) { return e.name; });
+    var sensorNames = data.map(function (value) { return value.sensors })
+        .reduce(function (a, b) { return a.concat(b.map(function (e) { return e.name })); }, [])
+        .filter(function (value, index, self) {
+            return self.indexOf(value) === index;
+        })
+
+    console.info(sensorNames);
+
     $.each(sensorNames, function (index, value) {
         optionsHtml += "<option value='" + value + "'>" + value.charAt(0).toUpperCase() + value.slice(1)+"</option>"
     });
@@ -109,7 +116,13 @@ function fillPackageHistory(data) {
     }
     packageHistory = data;
 
-    var tableHeading = getTableHeadingHtml(packageHistory[0].sensors);
+    var sensorNames = packageHistory.map(function (value) { return value.sensors })
+        .reduce(function (a, b) { return a.concat(b.map(function (e) { return e })); }, [])
+        .filter(function (value, index, self) {
+            return self.findIndex(function (v) { return v.name === value.name }) === index;
+        });
+
+    var tableHeading = getTableHeadingHtml(sensorNames);
     $("#packageHistory thead").empty();
     $(tableHeading).appendTo($("#packageHistory thead"));
 
@@ -220,7 +233,6 @@ function showMap(data) {
             strokeOpacity: 1.0,
             strokeWeight: 2
         });
-        console.info(arrayKeys.indexOf(index))
         flightPath.setMap(map);
     });
 }
@@ -282,7 +294,12 @@ function attachMarkerDescription(marker, text) {
 }
 
 function drawChart(data, key) {
-    var res = data.map(function (e) { return { date: e.date, value: $.grep(e.sensors, function (s) { return s.name == key; })[0].data } });
+    var res = data.map(function (e) {
+        var sensor = e.sensors.find(function (s) { return s.name == key; });
+        return {
+            date: e.date, value: sensor ? sensor.data : 0
+        }
+    });
 
     var labels = res.map(function (e) { return moment(e.date).format('l'); });
     var values = res.map(function (e) { return e.value; });
