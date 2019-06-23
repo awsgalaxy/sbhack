@@ -29,5 +29,14 @@ How it works
 What's Here
 -----------
 * README.md
-* BlockChainProject - source code of the web application itself. It's implemented with ASP.NET Core.
+* BlockChainProject - source code of the web application itself. 
 * SmartContracts - Ethereum smart contracts
+
+Technology stack
+-----------
+* ASP.NET Core
+* HTML/CSS/JS and Bootstrap
+* Metamask Wallet, Nethereum, Truffle, Solidity
+* Ethereum/Rapstan and a Private Ethereum Network in AWS
+* AWS DocumentDB (Mongo)
+* AWS CodeStar as a hosting environment and Continuous Integration system triggering github web hooks for the master branch.
