@@ -1,6 +1,12 @@
 Ingredients and products tracking LETTER OF CREDIT solution based up on the Blockchain
 ==================================================
 
+Application URL: http://ec2-3-84-201-11.compute-1.amazonaws.com/
+Tracking code: 97abd0ab-5e69-4669-9dd5-04185eb9e272
+Repository: https://github.com/awsgalaxy/sbhack
+
+-----------
+
 You see a huge number of products visiting a supermarket? Wide range of products at a different price and quality from various producers? You aren't sure whether the food you are buying has been transported properly as well as its ingredients? Take your phone and discover it at no time.
 
 Problems solved
