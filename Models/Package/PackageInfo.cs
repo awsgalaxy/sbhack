@@ -8,6 +8,7 @@ using System.Text;
 
 namespace Models.Package
 {
+    [BsonIgnoreExtraElements]
     public class PackageInfo : IDBObject
     {
         [BsonRepresentation(BsonType.ObjectId)]

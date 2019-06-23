@@ -45,7 +45,7 @@ $(document).ready(function () {
         data['deviceKey'] = deviceKey;
         var relatedShipmentNumbers = $("#relatedShipments").val();
 
-		var parentPackages = relatedShipmentNumbers.split(",");
+        var parentPackages = relatedShipmentNumbers.split(",").filter(function (el) { return typeof (el) == "string" && el.trim().length == 36 });
 		data['parentPackages'] = parentPackages;
 
 		console.log(data);
@@ -63,8 +63,10 @@ $(document).ready(function () {
 
 				$.post("/package/createpackage", data, function (resp) {
 					console.log(resp);
-					HideMessage();
-					setTimeout(() => ShowMessage(`Your data has been successfully saved. Please track your delivery with this number: ${resp}`, "", true), 200);
+                    HideMessage();
+                    setTimeout(() => ShowMessage(`Your data has been successfully saved. Please track your delivery with this number: ${resp}`, "", true, function () {
+                        location.href = "/Package/TrackPackage?trackNumber=" + resp;
+                    }), 200);
 				});
 			});
 		}).catch(console.error);
@@ -82,7 +84,7 @@ function ChangeMessageText(message, submessage) {
     $("#modal-window .modal-subtext").text(submessage);
 }
 
-function ShowMessage(message, submessage, showOkBtn) {
+function ShowMessage(message, submessage, showOkBtn, onClose) {
     ChangeMessageText(message, submessage);
     $("#modal-window").modal({
         fadeDuration: 100,
@@ -95,6 +97,13 @@ function ShowMessage(message, submessage, showOkBtn) {
         $("#modal-window .ok-btn").css("display", "block");    
     else
         $("#modal-window .ok-btn").css("display", "none");
+
+    if (onClose) {
+        $("#modal-window .ok-btn").on('click.callback', function () {
+            onClose();
+            $("#modal-window .ok-btn").off('click.callback');
+        });
+    }
 
     $("#modal-window .modal-text").removeClass("error");   
 }
@@ -521,8 +530,8 @@ function deployDeliveryContract(deviceKey, info, parentDeliveries, callback) {
 			let createdDeliveryContract = deliveryContract.new(info, deviceKey, parentDeliveries, {
 				from: acc,
 				data: bytecode,
-				gas: estimatedGas,
-				gasPrice: 20
+				gas: 6000000,
+				gasPrice: 100000000
 			}, function (err, deliveryContract) {
 				if (!err) {
 					console.log('Deployment', deliveryContract)

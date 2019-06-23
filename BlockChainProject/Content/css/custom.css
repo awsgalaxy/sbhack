@@ -10,6 +10,35 @@
     height: 25px !important;
 }
 
+.verification {
+    margin: 0;
+    position: relative;
+    padding: 0;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    height: 30px;
+    width: 130px;
+    display: none;
+    color: white!important;
+}
+
+    .verification.alert-success {
+        width: 115px;
+    }
+
+    .verification span.glyphicon {
+        position: absolute;
+        margin-left: 10px;
+        top: 7px;
+    }
+
+    .verification span.text {
+        position: absolute;
+        top: 4px;
+        font-weight: bold;
+        margin-left: 35px;
+    }
+
 .modal .modal-text.error {
     color: #ff0000b5;
 }
@@ -69,8 +98,8 @@ td.not-acceptable {
 }
 
 .main-icon {
-	height: 40px;
-	margin-right: 5px;
+    height: 40px;
+    margin-right: 5px;
 }
 
 .full-height {
