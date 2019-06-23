@@ -29,5 +29,5 @@ How it works
 What's Here
 -----------
 * README.md
-* BlockChainProject - source code of the web application itself
+* BlockChainProject - source code of the web application itself. It's implemented with ASP.NET Core.
 * SmartContracts - Ethereum smart contracts
