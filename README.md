@@ -1,9 +1,9 @@
 Ingredients and products tracking LETTER OF CREDIT solution based up the Blockchain
 ==================================================
 
-Application URL: http://ec2-3-84-201-11.compute-1.amazonaws.com/
-Tracking code: 97abd0ab-5e69-4669-9dd5-04185eb9e272
-Repository: https://github.com/awsgalaxy/sbhack
+* Application URL: http://ec2-3-84-201-11.compute-1.amazonaws.com/
+* Tracking code: 97abd0ab-5e69-4669-9dd5-04185eb9e272
+* Repository: https://github.com/awsgalaxy/sbhack
 
 -----------
 
